@@ -1,4 +1,4 @@
-package com.thetestingacademy.samplecheck;
+package com.thetestingacademy.SampleCheck;
 
 public class APITesting004_BuilderPatternDesignPattern {
 
