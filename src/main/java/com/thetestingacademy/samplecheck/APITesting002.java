@@ -19,5 +19,7 @@ RestAssured.given()
         .then().log().all()
              .statusCode(200);
 
+
+   // Expected Status code <201> but was 200
     }
 }
