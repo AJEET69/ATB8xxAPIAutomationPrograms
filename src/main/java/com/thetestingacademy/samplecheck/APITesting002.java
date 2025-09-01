@@ -11,7 +11,8 @@ public class APITesting002 {
         // base URI ->  https://restful-booker.herokuapp.com
         // base Path -> /booking/1
 
-RestAssured.given()
+RestAssured
+        .given()
               .baseUri("https://restful-booker.herokuapp.com")
               .basePath("/booking/1")
         .when()

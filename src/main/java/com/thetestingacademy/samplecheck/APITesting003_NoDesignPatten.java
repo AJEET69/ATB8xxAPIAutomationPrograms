@@ -9,7 +9,7 @@ public class APITesting003_NoDesignPatten {
         System.out.println("Step 2");
     }
 
-    public void step3(String p){
+    public void step3(String param1){
         System.out.println("Step 3");
     }
 
