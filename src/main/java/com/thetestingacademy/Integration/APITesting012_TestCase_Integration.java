@@ -1,4 +1,4 @@
-package RestAssuredBasics.Integration;
+package com.thetestingacademy.Integration;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -8,6 +8,7 @@ import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
 public class APITesting012_TestCase_Integration {
@@ -49,6 +50,10 @@ public class APITesting012_TestCase_Integration {
         // Extract the token
         token = response.jsonPath().getString("token");
         System.out.println(token);
+
+        assertThat(token).isAlphanumeric().isNotEmpty().isNotNull().isNotBlank();
+
+
         return token;
     }
 
@@ -80,6 +85,11 @@ public class APITesting012_TestCase_Integration {
 
         bookingId = response.jsonPath().getString("bookingid");
         System.out.println(bookingId);
+
+
+        assertThat(bookingId).isNotEmpty().isNotNull().isNotBlank();
+
+
         return bookingId;
 
     }

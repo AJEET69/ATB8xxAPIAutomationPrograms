@@ -2,8 +2,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="C:/Users/ajeet/IdeaProjects/ATB8xxAPIAutomationPrograms">
+        <groups>
+            <run>
+                <include name="qa"></include>
+                <exclude name="reg"></exclude>
+            </run>
+        </groups>
         <classes>
-            <class name="com.thetestingacademy.RestAssuredBasics.GET.APITesting005_BDDStyle_GET">
+            <class name="com.thetestingacademy.TestNGExamples.APITesting015_TestNG_Groups">
             </class>
         </classes>
     </test>

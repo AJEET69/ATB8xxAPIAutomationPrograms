@@ -1,4 +1,4 @@
-package RestAssuredBasics.PATCH;
+package com.thetestingacademy.RestAssuredBasics.PATCH;
 
 import io.qameta.allure.Description;
 import io.restassured.RestAssured;

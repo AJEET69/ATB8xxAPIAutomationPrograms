@@ -1,4 +1,4 @@
-package RestAssuredBasics.GET;
+package com.thetestingacademy.RestAssuredBasics.GET;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
