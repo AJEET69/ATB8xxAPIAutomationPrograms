@@ -1,23 +1,14 @@
 package com.thetestingacademy.Assertion;
 
-
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
-import io.restassured.specification.RequestSpecification;
 import org.hamcrest.Matchers;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class APITesting022_Assertions_REAL {
-
-    RequestSpecification requestSpecification;
-    ValidatableResponse validatableResponse;
-    Response response;
-    String token;
-    Integer bookingId;
 
     @Test
     public void test_post() {
@@ -33,28 +24,28 @@ public class APITesting022_Assertions_REAL {
                 "    \"additionalneeds\" : \"Lunch\"\n" +
                 "}";
 
-        requestSpecification = RestAssured.given();
-        requestSpecification.baseUri("https://restful-booker.herokuapp.com/");
-        requestSpecification.basePath("/booking");
-        requestSpecification.contentType(ContentType.JSON);
-        requestSpecification.body(payload_POST).log().all();
-
-        Response response = requestSpecification.when().post();
-
-        validatableResponse = response.then().log().all();
-        validatableResponse.statusCode(200);
+        Response response = RestAssured.given()
+                .baseUri("https://restful-booker.herokuapp.com/")
+                .basePath("/booking")
+                .contentType(ContentType.JSON)
+                .body(payload_POST)
+                .log().all()
+                .when().post();
 
         // Hamcrest Assertions
-        validatableResponse.body("booking.firstname", Matchers.equalTo("Pramod"));
-        validatableResponse.body("booking.lastname", Matchers.equalTo("Dutta"));
-        validatableResponse.body("booking.depositpaid", Matchers.equalTo(false));
-        validatableResponse.body("booking", Matchers.notNullValue());
+        response.then().log().all()
+                .statusCode(200)
+                .body("booking.firstname", Matchers.equalTo("Pramod"))
+                .body("booking.lastname", Matchers.equalTo("Dutta"))
+                .body("booking.depositpaid", Matchers.equalTo(false))
+                .body("booking", Matchers.notNullValue());
+
+        // Extract data for other assertions
+        Integer bookingId = response.jsonPath().getInt("bookingid");
+        String firstname = response.jsonPath().getString("booking.firstname");
+        String lastName = response.jsonPath().getString("booking.lastname");
 
         // TestNG Assertions
-        bookingId = response.then().extract().path("bookingid");
-        String firstname = response.then().extract().path("booking.firstname");
-        String lastName = response.then().extract().path("booking.lastname");
-
         Assert.assertNotNull(bookingId);
         Assert.assertEquals(firstname, "Pramod");
         Assert.assertEquals(lastName, "Dutta");
@@ -63,6 +54,4 @@ public class APITesting022_Assertions_REAL {
         assertThat(bookingId).isNotNull().isPositive();
         assertThat(firstname).isEqualTo("Pramod").isNotNull().isNotBlank();
     }
-
-
 }
